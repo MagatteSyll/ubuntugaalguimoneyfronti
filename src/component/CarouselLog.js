@@ -56,7 +56,10 @@ return(
          autoPlaySpeed={5000}
          transitionDuration={500} >
            {pub.map(p=>
-          <Image  src={`http://127.0.0.1:8000${p.image}`} alt=""  key={p.id} className='imgcarousellog'/>
+          <Image  
+          //src={`http://127.0.0.1:8000${p.image}`} 
+           src={`https://gaalguimoneyback.herokuapp.com${p.image}`}
+          alt=""  key={p.id} className='imgcarousellog'/>
             )}
        </Carousel>
         </IonCol>
