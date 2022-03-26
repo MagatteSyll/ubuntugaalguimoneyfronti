@@ -74,7 +74,7 @@ function App() {
     const getuser=()=>{
      
       axiosInstance
-      .get('http://127.0.0.1:8000/api/client/getuser/')
+      .get('client/getuser/')
       .then(res=>{
         setuser(res.data)
         setuserload(true)

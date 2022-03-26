@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import HomeMobile from './mobile/HomeMobile'
 import HomeDesk from './desktop/HomeDesk'
-import './style.css'
+
 
 
 //Page accueil personnelle

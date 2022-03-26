@@ -33,10 +33,7 @@
   margin-left: 2px;
   margin-right: 2px;
 }
-#btnpaginate:hover{
-  background: none;
-  color: inherit;
-}
+
 .navoff{
   border-bottom: 1px solid gray;
 }
@@ -195,18 +192,11 @@ input[type=number]::-webkit-outer-spin-button {
 .nodecoul{
    list-style-type: none;
 }
-.linkfootofficiel: hover{
-  text-decoration: none;
-  color: black;
-}
+
 .iconsocialfoot{
   zoom: 2;
 }
-.noeffecthove:hover{
-  background: none;
-  border: none;
-  color: inherit;
-}
+
 .divaciton{
   width: 50%;
 }
