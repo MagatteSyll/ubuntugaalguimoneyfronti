@@ -1,9 +1,7 @@
 import React,{useState,useEffect, Fragment} from 'react'
 import axiosInstance from '../axios';
 import { IonLoading} from '@ionic/react'
-import HistoriqueGeneralesDesk from '../component/desktop/HistoriqueGeneralesDesk'
-import '../component/style.css'
-import MenuHistory from '../component/mobile/MenuHistory';
+import MenuHistory from '../component/MenuHistory';
 
 
 //Toute l historique
@@ -34,7 +32,6 @@ function Historique(props) {
           <Fragment>
             {load?
             <Fragment>
-            <HistoriqueGeneralesDesk messages={messages}  />
           <MenuHistory messages={messages}/>
           </Fragment>
           :<IonLoading

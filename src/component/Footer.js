@@ -1,21 +1,19 @@
 import React,{Fragment} from 'react'
 import FooterDesk from './desktop/FooterDesk'
-import Pied from './mobile/Pied'
+import FooterMobile from './mobile/FooterMobile'
+import FootStaf from '../Staf/FootStaf'
 
-function Footer(props) {
-    const islog=props.islog
-    const isstaf=props.isstaf
+function Footer({isstaf}) {
     return (
         <div>
-            {isstaf?null:
+            {isstaf?
+            <FootStaf/>:
             <div>
-            {islog?
-            <Fragment>
-             <FooterDesk/>
-             <Pied/>
-            </Fragment>
-            :null}
-            </div>}
+            <FooterDesk/>
+            <FooterMobile/>
+            </div>
+         }
+           
             
         </div>
     )

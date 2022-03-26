@@ -4,6 +4,8 @@ import {Link } from 'react-router-dom'
 import  {arrowBackOutline,checkmarkDoneOutline}  from 'ionicons/icons'
 import axiosInstance from '../axios'
 import { useParams } from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 
 
 function SuccesEnvoiDirect() {
@@ -26,17 +28,16 @@ function SuccesEnvoiDirect() {
 
     return (
         <Fragment>
-            {load?
-        <div>
-           
-           <div className="w3-bar w3-green" style={{margin:'0 auto'}}>
+        {load?
+        <div> 
+           <div className="w3-bar w3-green">
            <div className="w3-bar-item w3-center">
-           <Link to='/accueil' style={{marginRight:'10px'}}> <IonIcon icon={arrowBackOutline} style={{zoom:1.0}}/></Link>
-          <IonText style={{margin:'0 auto'}} >  Transaction effectuée</IonText></div>
+           <Link to='/accueil' className='nodecolink'> <ArrowBackIcon className='iconsocial'/> </Link>
+          <IonText  >  Transaction effectuée</IonText></div>
            </div>
-            <div style={{margin:'0 auto',textAlign:'center'}}> 
+            <div className='centerbtn'> 
              <IonCard>
-                <h3> <IonIcon  icon={checkmarkDoneOutline}/> Envoi direct  GaalguiMoney</h3> 
+                <h3><DoneOutlineIcon/> Envoi direct  GaalguiMoney</h3> 
                 <h3> <b>{recu.envoi.somme} CFA</b></h3> 
              </IonCard>
              <h4>Informations  sur la transaction</h4>
@@ -53,7 +54,7 @@ function SuccesEnvoiDirect() {
             
                      <IonCol size='5'>
                       <p>Commission de l envoi</p>
-                      <p><b>{recu.commission} CFA</b></p>
+                      <p><b>{recu.envoi.commission} CFA</b></p>
                      </IonCol>
                      <IonCol size='5'>
                       <p>Beneficiaire</p>
@@ -61,18 +62,12 @@ function SuccesEnvoiDirect() {
                      </IonCol>
                  </IonRow>
              </IonGrid>
-             <IonCard>
+             <IonCard className='cartsignature'>
                  Signature
              </IonCard>
             </div>
             
-        </div>:<IonLoading
-        cssClass='my-custom-class'
-        isOpen={showLoading}
-        onDidDismiss={() => setShowLoading(false)}
-        message={'Chargement...'}
-        duration={5000}
-      />}
+        </div>:null}
         </Fragment>
     )
 }

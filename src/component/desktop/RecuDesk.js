@@ -1,12 +1,11 @@
-import React,{Fragment, useState} from 'react'
-import '../style.css'
-import {callOutline,locationOutline,chevronBackOutline} from 'ionicons/icons'
 import { IonCard, IonCol, IonGrid, IonIcon, IonItem, IonRow, IonText } from '@ionic/react'
 import {Link} from 'react-router-dom'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 
-function RecuDesk(props) {
+function RecuDesk({recu}) {
  
-    const recu=props.recu
     return (
         <div className='desk'>
      <div className='recu'>
@@ -14,32 +13,32 @@ function RecuDesk(props) {
              <IonRow>
                  <IonCol size='3'>
                  <IonItem>
-                 <Link to='/accueil'><IonIcon icon={chevronBackOutline} style={{zoom:'1.5'}}/></Link> 
+                 <Link to='/accueil'><ArrowBackIcon className='iconsocial'/></Link> 
                   </IonItem>
                  <IonCard>Logo</IonCard>
-                 </IonCol>
-                 <IonCol size='6' style={{marginLeft:'170px'}}>
+                  </IonCol>
+                 <IonCol size='6' className='recucol'>
                   <IonItem>
-                      <IonText> <IonIcon icon={locationOutline}/> Dakar, rue on s en fiche</IonText>
+                      <IonText> <LocationOnIcon />  Dakar, rue on s en fiche</IonText>
                   </IonItem>
                   <IonItem>
-                      <IonText> <IonIcon icon={callOutline}/> +(221)772059140</IonText>
-                      <IonText style={{marginLeft:'40px'}} > +(221)772197305</IonText>
-                      <IonText style={{marginLeft:'40px'}} > www.gaalguimoney.com</IonText>
+                      <IonText> <LocalPhoneIcon/> +(221)772059140</IonText>
+                      <IonText className='recutext' > +(221)772197305</IonText>
+                      <IonText className='recutext' > www.gaalguimoney.com</IonText>
                   </IonItem>
                  </IonCol>
              </IonRow>
          </IonGrid>
         
-         <div style={{textAlign:'center'}}>
-         <h2 style={{textAlign:'center'}}> Recu de transaction GaalguiMoney</h2>
+         <div className='centerbtn'>
+         <h2 className='centerbtn'> Recu de transaction GaalguiMoney</h2>
              <IonGrid>
                  <IonRow>
                      <IonCol size='5'>
                      <p>Date de la transaction</p>
                      <h4>{new Date(recu.created).toLocaleDateString()}</h4>
                      </IonCol>
-                     <IonCol size='5' style={{marginLeft:'0px'}}>
+                     <IonCol size='5' >
                      <p>Nature de la transaction </p>
                      <h4>{recu.nature_transaction}</h4>
                       </IonCol>
@@ -53,19 +52,19 @@ function RecuDesk(props) {
                      <h4>{recu.montant} CFA </h4>
                      </IonCol>
                      {recu.commission!=null?
-                     <IonCol size='5' style={{marginLeft:'0px'}}>
+                     <IonCol size='5' >
                      <p>Commission </p>
                      <h4>{recu.commission} CFA </h4>
                      </IonCol>:null}
                      {recu.beneficiaire!=null?
-                     <IonCol size='5' style={{marginLeft:'0px'}}>
+                     <IonCol size='5' >
                      <p>Beneficiaire </p>
                      <h4>{recu.beneficiaire}</h4>
                      </IonCol>:null}  
                  </IonRow>
              </IonGrid>
          </div>
-         <div style={{marginLeft:'500px'}}>
+         <div className='cartsignature'>
              <IonCard>
              Signature
              </IonCard>    

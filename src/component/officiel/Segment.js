@@ -30,7 +30,7 @@ function Segment() {
 
     return (
      <div>
-     <IonSegment className='segment'>
+     <IonSegment className='segment' scrollable>
     <IonSegmentButton onClick={handletarif}>
       <Box><IonText> <IonIcon icon={wallet}/> Nos tarifs</IonText></Box>
     </IonSegmentButton>

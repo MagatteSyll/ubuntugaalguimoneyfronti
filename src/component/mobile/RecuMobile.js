@@ -1,29 +1,26 @@
-import { IonCard, IonCol, IonGrid, IonItem, IonRow,IonIcon,IonText } from '@ionic/react'
-import React,{useState} from 'react'
-import '../style.css'
-import {callOutline,locationOutline,chevronBackOutline} from 'ionicons/icons'
+import { IonCard, IonCol, IonGrid, IonItem, IonRow,IonText } from '@ionic/react'
 import { Link } from 'react-router-dom'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 
-function RecuMobile(props) {
-    const  [code, setcode] = useState(true)
-    const recu=props.recu
+function RecuMobile({recu}) {
+    
     return (
         <div className='mobile'>
             <IonGrid>
                 <IonRow>
                     <IonCol size='8'>
                     <IonItem>
-                 <Link to='/accueil'> <IonIcon icon={chevronBackOutline} style={{zoom:'1.5'}}/></Link> 
+                 <Link to='/accueil'><ArrowBackIcon className='iconsocial'/> </Link> 
                   </IonItem>
                     <IonCard>
                     Logo
                   </IonCard>
-                 
-
                     </IonCol>   
                 </IonRow>
             </IonGrid>
-            <div style={{marginLeft:'15px'}}>
+            <div className='divrecumobile'>
                 <h6><b>Reçu de transaction GaalguiMoney</b></h6>
                 <p>Date de la transaction <b>{new Date(recu.created).toLocaleDateString()}</b></p>
                 <p>Nature de la transaction <b>{recu.nature_transaction}</b></p>
@@ -37,14 +34,14 @@ function RecuMobile(props) {
                    Signature
                </IonCard>
                <IonItem>
-               <IonIcon icon={locationOutline}/> Dakar, rue on s en fiche
+             <LocationOnIcon />  Dakar, rue on s en fiche
                </IonItem>
                <IonItem>
-                      <IonText> <IonIcon icon={callOutline}/> +(221)772059140</IonText>
-                      <IonText style={{marginLeft:'40px'}} > +(221)772197305</IonText>
+                      <IonText> <LocalPhoneIcon/> +(221)772059140</IonText>
+                      <IonText className='recutext' > +(221)772197305</IonText>
                   </IonItem>
                   <IonItem>
-                  <IonText style={{marginLeft:'40px'}} > www.gaalguimoney.com</IonText>
+                  <IonText className='recutext'> www.gaalguimoney.com</IonText>
                   </IonItem>
                       
            </div>

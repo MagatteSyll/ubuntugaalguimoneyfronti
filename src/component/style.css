@@ -1,46 +1,106 @@
 /*footer du desktop*/
 .footer {
     position: relative;
-    left: 0;
-    bottom: 0;
     width: 100%;
-    /*background-color: black;*/
     color: black;
     text-align: center;
-    
-
- }
- p{
-     margin-top: 1;
- }
- #toggle {
-  display: none;
+}
+ 
+.recucol{
+    margin-left: 170px;
+}
+.recutext{
+    margin-left: 40px;
+}
+.cartsignature{
+    margin-left: 500px;
+}
+.divrecumobile{
+  margin-left: 15px;
+}
+.linksocial{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.iconsocial{
+  zoom: 1.5;
+}
+.cartaccueiltaux {
+  width: 50%;
 
 }
-.segment{
-  margin-top: 2;
-  
+#btnpaginate{
+  margin-left: 2px;
+  margin-right: 2px;
 }
-
+#btnpaginate:hover{
+  background: none;
+  color: inherit;
+}
+.navoff{
+  border-bottom: 1px solid gray;
+}
 /*stylisation sidebar*/
  .sidebar {
     margin: 0;
     padding: 0;
-    width: 25%;
+    width: 100%;
     background-color: #f1f1f1;
     position: absolute;
+    height: 600px;
+    overflow: auto;
+    width: 25%;
+  }
+/*page sur desktop avec sidebar*/
+.displayside{
+  width: 100%;
+  margin-left: 25%;
+  height: 600px;
+  position: relative;
+
+}
+/*Stylisation affichage mobile et desktop*/
+@media screen and (max-width: 599px){
+  .desk{
+    display: none;
+  }
+  .sidebar{
+    display: none;
+  }
+  .displayside{
+     width: 100%;
+     margin-left: 0%;
+  }
+  .footer{
+    display: none;  
+  }
+ .mobile {
     height: 100%;
     overflow: auto;
+   
   }
+  
+}
+@media screen and (min-width: 600px){
+  .mobile{
+    display: none;
+  }
+  .desk {
+    height: 100%;
+    overflow: auto;
+    position: relative;
+   
+  }
+
+  
+}
  
 
   /*Stylisation du segment de la page officielle*/
   @media screen and (max-width: 700px) {
     
      /*Stylisation du segment */
-    .segment{
-      display: none;
-    }
+  
      /*Stylisation du button toggle*/
     #toggle {
       display: initial;
@@ -49,7 +109,6 @@
    
   }
   
- 
 
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
@@ -61,190 +120,8 @@ input[type=number]::-webkit-outer-spin-button {
   position:relative;
 }
 
-#navbar {
-  width: 100%;
-  background-color: #555;
-  overflow: auto;
-  margin-bottom:0;
-  padding: 0;
-  position: relative;
-}
-
-/* lien du navbar */
-#navbar button {
-  float: left;
-  text-align: center;
-  color: white;
-  text-decoration: none;
-  border: none;
-  background: none;
-  padding: 4;
-  font-size: 17px;
-}
 
 
-#navbar button:hover {
-  background-color: #000;
-}
-
-
-.navdrawer {
-  width: 100%;
-  background-color:beige;
-  overflow: auto;
- 
-}
-#not{
-  margin-right: 0.75%;
-  padding-left: 0.75%;
-}
-
-@media screen and (min-width: 600px) {
- 
-  #not{
-    margin-right: 1%;
-    padding-left: 1%;
-  } 
-}
-@media screen and (max-width: 380px) {
- 
-  #not{
-    margin-right: 0;
-    padding-left: 0;
-  } 
-}
-@media screen and (min-width: 1000px) {
- 
-  #notm{
-    margin-right: 3%;
-    padding-left: 3%;
-  } 
-}
-@media screen and (min-width: 700px) {
- 
-  #notm{
-    margin-right: 2%;
-    padding-left: 2%;
-  } 
-}
-.form{
-  margin: 0 auto;
-  margin-top: 2%;
-  margin-left: 2%;
-  margin-right: 2%;
-  
-}
-.divform{
-  margin: 0 auto;
-  margin-top: 2%;
-  margin-left: 25%;
-  margin-right: 25%;
-  border: 1px solid black
-
-}
-.copyr{
-  text-align: center;
-}
-
-/*Stylisation affichage mobile et desktop*/
-@media screen and (max-width: 599px){
-  .desk{
-    display: none;
-  }
-  .footer{
-    display: none;  
-  }
-  
-
-
-  
-
-}
-@media screen and (min-width: 600px){
-  .mobile{
-    display: none;
-  }
-  .content {
-    margin-left: 25%;
-    height: 100%;
-    overflow: auto;
-   
-  }
-
-  
-}
-.centerbtn{
-  text-align: center;
-}
-/*Photos du carousel de la page officielle*/
-.imgcarousel{
-  height:100%;
-  width:100%;
-  transform-style: preserve-3d;
-  transform: rotate3d(1, 1, 1)
-
-}
-/*  segment de l historique mobile*/
-#btnn{
-  text-decoration: none;
-  border: none;
-  margin: 5px;
-}
-.divhistory{
-  margin-top: 50px;
-}
-/*Recu transaction*/
-.recu{
-  height: 100%;
-  scroll-behavior: auto;
-  
-  
-}
-/*bar de notification */
-.notifbar{
-  margin-left: 25%;
-  width: 50%;
-  position: relative;
-  display: inline-block;
- 
-}
-.contenu{
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    padding: 12px 16px;
-    z-index: 1;
-  
-}
-/*menu historique*/
-.buttonmenu{
-  margin-left: 10px;
-  margin-right: 10px;
-  border-radius: 15%;
-  border: 1px solid gray;
- 
-}
-
-/*centrer du contenu avec p*/
-.pcentre{
-  text-align: center;
-}
-
-/*Accueil staff*/
-.staff{
-  height: 100%; 
-  overflow: auto;
- 
-}
-/*carousel de la page connexion et inscription desktop*/
-.carouselpubinscription{
-  height: 100%;
-  overflow: auto;
-  margin-left: 25%;
-
-}
 /*Side bar de la connexion et de l incription*/
 .sideconnexion {
   margin: 0;
@@ -253,29 +130,89 @@ input[type=number]::-webkit-outer-spin-button {
   background-color: #f1f1f1;
   position: absolute;
   height: 100%;
+  overflow: auto;
   
 }
-/*Card de la connexion et de l inscription*/
-.card{
-height: 100%;
-text-align: center;
-overflow: auto;
+
+.carousellog{
+  height:600px;
+  margin-left: 25%;
 }
-.asterix{
+.noflow{
+  overflow-x: hidden;
+}
+.imgcarousellog{
+  width: 100%;
+  height: 600px;
+}
+.redstyle{
   color:red;
 }
-.homedesk{
-  height: 100%;
-  overflow: auto;
-  color: rebeccapurple;
+.centerbtn{
+  text-align: center;
+}
+.link{
+ /* text-decoration: none;*/
+  color: black;
+}
+.btndrop{
+  background: none;
+  border: none;
+}
+.btnnav{
+  margin-left: 3px;
+  margin-right: 3px;
+}
+.segmentnavmobile{
+  background: none;
+  border: none;
 }
 
-/* Bouton pagination*/
-#btnpaginate{
-  margin-left: 2px;
-  margin-right: 2px;
-  margin-top: 5px;
+.nodecolink{
+  text-decoration: none;
+  color: inherit;
+}
+.segment{
+  margin-top: 10px;
 }
 
+.divcarousel{
+  margin-top: 20px;
+}
+.imgcarousel{
+  width: 100%;
+  height: 350px;
+}
+.footerofficiel{
+  border-top: 1px solid gray;
 
+}
 
+.linkfootofficiel{
+  text-decoration: none;
+  color: black;
+}
+.nodecoul{
+   list-style-type: none;
+}
+.linkfootofficiel: hover{
+  text-decoration: none;
+  color: black;
+}
+.iconsocialfoot{
+  zoom: 2;
+}
+.noeffecthove:hover{
+  background: none;
+  border: none;
+  color: inherit;
+}
+.divaciton{
+  width: 50%;
+}
+.formdepot{
+  width: 60%;
+}
+.divform{
+  margin-left:30%;
+}

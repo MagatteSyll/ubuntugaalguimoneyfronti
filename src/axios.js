@@ -1,14 +1,14 @@
 import axios from 'axios';
 
-const baseURL = 'https://verysoongaalguimoney.herokuapp.com/api/';
-//const baseURL ='http://127.0.0.1:8000/api/'
+//onst baseURL = 'https://verysoongaalguimoney.herokuapp.com/api/';
+const baseURL ='http://127.0.0.1:8000/api/'
 
 const axiosInstance = axios.create({
 	baseURL: baseURL,
 	timeout: 5000,
 	headers: {
-		Authorization: localStorage.getItem('__jdkm__')
-			? 'JWT ' + localStorage.getItem('__jdkm__')  
+		Authorization: localStorage.getItem('__jmdf__')
+			? 'Bearer ' + localStorage.getItem('__jmdf__')  
 			: null,
 		'Content-Type': 'application/json',
 		accept: 'application/json',
@@ -33,7 +33,7 @@ axiosInstance.interceptors.response.use(
 
 		if (
 			error.response.status === 401 &&
-			originalRequest.url === baseURL + 'utilisateur/token/refresh/'
+			originalRequest.url === baseURL + 'client/token/refresh/'
 		) {
 			window.location.href = '/connexion/';
 			return Promise.reject(error);
@@ -44,7 +44,7 @@ axiosInstance.interceptors.response.use(
 			error.response.status === 401 &&
 			error.response.statusText === 'Unauthorized'
 		) {
-			const refreshToken = localStorage.getItem('__jvqm__');
+			const refreshToken = localStorage.getItem('__jvmdf__');
 
 			if (refreshToken) {
 				const tokenParts = JSON.parse(atob(refreshToken.split('.')[1]));
@@ -55,10 +55,10 @@ axiosInstance.interceptors.response.use(
 
 				if (tokenParts.exp > now) {
 					return axiosInstance
-						.post('utilisateur/token/refresh/', { refresh: refreshToken })
+						.post('client/token/refresh/', { refresh: refreshToken })
 						.then((response) => {
-							localStorage.setItem('__jdkm__', response.data.access);
-							localStorage.setItem('__jvqm__', response.data.refresh);
+							localStorage.setItem('__jmdf__', response.data.access);
+							localStorage.setItem('__jvmdf__', response.data.refresh);
 
 							axiosInstance.defaults.headers['Authorization'] =
 								'JWT ' + response.data.access;

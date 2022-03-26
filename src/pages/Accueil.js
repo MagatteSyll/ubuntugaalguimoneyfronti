@@ -1,42 +1,46 @@
 import React,{Fragment,useEffect,useState} from 'react'
 import axiosInstance from '../axios';
 import AccueilStaff from '../Staf/AccueilStaff';
-import 'react-toastify/dist/ReactToastify.css';
-import {IonLoading} from '@ionic/react'
 import '../component/style.css'
-import Home from '../component/Home';
-import '../component/style.css'
+import AccueilDesk from '../component/desktop/AccueilDesk'
+import AccueilMobile from '../component/mobile/AccueilMobile'
 
 
-function Accueil(props) {
-    const  [isstaf, setisstaf] = useState(false)
-    const  [isload, setisload] = useState(false)
-    const [showLoading, setShowLoading] = useState(true);
+function Accueil({isstaf,user}) {
+    const  [load, setload] = useState(false)
+    const [message,setmessage]=useState([])
   
-    useEffect(()=>{
-        axiosInstance
-        .get('staff/isstaff/')
-        .then(res=>{
-         // console.log(res.data)
-          setisstaf(res.data)
-          setisload(true)
-        })
-      })
-   
+   useEffect(()=>{
+       getlastmessage()
+    },[])
+   const getlastmessage=()=>{
+       axiosInstance
+        .get('client/lastmessage/')
+        .then((res=>{
+            setmessage(res.data)
+            setload(true)
+        })) 
+   }
+   const getpay=()=>{
+
+   }
+
+   const getaction=()=>{
+    
+   }
+    
     return ( 
         
-        <Fragment>
-        {isload?
-        <Fragment>
-            {isstaf? <AccueilStaff />:
-            <Home/> }
-        </Fragment>:<IonLoading
-      cssClass='my-custom-class'
-      isOpen={showLoading}
-      onDidDismiss={() => setShowLoading(false)}
-      message={'Chargement...'}
-      duration={5000}
-     />}
+        <Fragment> 
+        {isstaf?<AccueilStaff />:
+        <div>
+        {load?
+        <>
+        <AccueilDesk user={user} message={message}/>
+        <AccueilMobile user={user}  message={message}/>
+        </>:null}
+        </div>}
+       
         </Fragment>
     )
 }

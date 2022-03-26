@@ -1,97 +1,80 @@
-import {  IonButton, IonCol, IonGrid, IonCheckbox, IonInput, IonItem, IonLabel, IonRow } from '@ionic/react'
-import React,{useState} from 'react'
-import { useHistory } from 'react-router'
-import axiosInstance from '../../axios'
-import axios from 'axios'
-import Pied from './Pied'
+import {IonCol, IonGrid, IonLabel, IonRow } from '@ionic/react'
 import { Link } from 'react-router-dom'
-import CarouselPub from '../officiel/CarouselPub'
+import CarouselLog from '../CarouselLog';
+import Input from "@material-ui/core/Input";
+import Visibility from "@material-ui/icons/Visibility";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import IconButton from "@material-ui/core/IconButton";
+import Avatar from '@material-ui/core/Avatar';
 
-const  ConnexionMobile=()=> {
-    const history= useHistory()
-    const [formData, updateFormData] = useState({
-        phone:'',
-        password:''
-    });
-    const  [showpassword, setshowpassword] = useState(false)
- 
-	const handleChange = e => {
-		updateFormData({
-			...formData,
-			[e.target.name]: e.target.value.trim(),
-		});
-	};
 
-	const handleSubmit=e=> {
-		e.preventDefault();
-		//console.log(formData);
 
-		axios
-       // .post(`https://verysoongaalguimoney.herokuapp.com/api/client/login/`, {
-            .post('http://127.0.0.1:8000/api/client/login/',{
-				phone: formData.phone,
-				password: formData.password,
-			})
-			.then((res) => {
-				localStorage.setItem('__jdkm__', res.data.access);
-				localStorage.setItem('__jvqm__', res.data.refresh);
-				axiosInstance.defaults.headers['Authorization'] =
-					'JWT ' + localStorage.getItem('__jdkm__');
-				//window.location.reload()
-				history.push("/accueil")
-                window.location.reload()
-              // console.log(res.data)
-			});};
-	
 
+const  ConnexionMobile=({handleSubmit,handleChange,showpassword,setshowpassword,classes})=> {
     return (
 
-       <div className='mobile'>    
-         <h1 className='ion-text-center'>GaalguiMoney(logo)</h1>
-            
-            <form onSubmit={handleSubmit} className='ion-align-self-center ion-padding' >
+       <div className='mobile'> 
+       <div className='container'>   
+         <h1>GaalguiMoney(logo)</h1>
+        <p className='centerbtn'> <Avatar className={classes.avatar}></Avatar></p>
+          </div>
+            <form onSubmit={handleSubmit} className='mt-3' >
             <IonGrid>
-            <IonRow className="ion-align-items-center">
-            <IonCol  size="12" className="ion-text-center">
-             <IonLabel><p className='centerbtn'><b> Numero de telephone</b></p> </IonLabel> <br/>
+            <IonRow >
+            <IonCol  size="10" className='container'>
+            <p className='centerbtn'><b> Numero de telephone <span className='redstyle'> *</span> </b></p>
+             <p> <Input
+            className="w3-input w3-border" 
+            type="text" name="phone"
+            onChange={handleChange} 
+            required
+            autoFocus 
+            fullWidth
+             />
+             </p>
             </IonCol>
-            <IonCol  size="12" className="ion-text-center">
-             <IonItem  >  
-             <IonInput type='tel' name='phone' onIonChange={handleChange} placeholder='+221...' />
-            </IonItem>
-            </IonCol>
-            <IonCol  size="12" className="ion-text-center">
-             <IonLabel><p className='centerbtn'> <b> Mot de passe</b></p></IonLabel> <br/>
-            </IonCol>
-             <IonCol  size="12" className="ion-text-center">
-             <IonItem  >
-            <IonInput 
-            type={showpassword?'text':'password'} 
-             name='password' 
-             onIonChange={handleChange} 
-             placeholder=' ******'/>
-             <IonCheckbox onIonChange={()=>setshowpassword(!showpassword)} /> 
-             </IonItem>
-             </IonCol> 
-            <IonCol size="12" className="ion-text-center">
-             <IonButton type='submit'  className="ion-margin-top" expand="block">Se connecter</IonButton>
+             <IonCol  size="10" className='container'>
+             <p className='centerbtn'> <IonLabel> <b> Mot de passe <span className='redstyle'> *</span></b></IonLabel> </p>
+             <Input
+             className="w3-input w3-border"
+             required
+             fullWidth
+             autoComplete="current-password"
+            onChange={handleChange}
+            name="password"
+            type={showpassword?'text':'password'}
+            placeholder="*********"
+            endAdornment={
+            <InputAdornment position="end">
+            <IconButton
+            onClick={()=>setshowpassword(!showpassword)}
+        //onMouseDown={handleMouseDownPassword}
+         >
+         {showpassword ? <Visibility /> : <VisibilityOff />}
+        </IconButton>
+        </InputAdornment>}
+            />
+          </IonCol> 
+            <IonCol size="10" className="container">
+            <p className='centerbtn'> <button type='submit'  className="w3-button w3-blue" >Se connecter</button></p>
              </IonCol>
              </IonRow>
             </IonGrid>
             </form>
             <IonGrid>
-               <IonRow className="ion-align-items-center">
-               <IonCol  size="12" className="ion-text-center">
-                       <p className='centerbtn'><Link to='/resetpassword' style={{color:'red',textDecoration:'none'}}>Mot de passe oublié?</Link></p>
+               <IonRow >
+               <IonCol  size="10" className="container" >
+                       <p className='centerbtn'><Link to='/resetpassword' className='link'>Mot de passe oublié?</Link></p>
                    </IonCol>
-                   <IonCol  size="12" className="ion-text-center">
-                       <p>Vous n avez pas encore de compte?<Link to='/inscription' 
-                       style={{color:'purple',textDecoration:'none'}}>Inscrivez vous</Link></p>
+                   <IonCol  size="10" className="container">
+        <p>Vous n avez pas encore de compte?<Link to='/inscription' className='link'>
+                       Inscrivez vous</Link></p>
                    </IonCol>
                </IonRow>
            </IonGrid>
-           <CarouselPub/>
-            <Pied/>
+           <CarouselLog/>
+           
        </div>
     )
 }

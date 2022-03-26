@@ -1,12 +1,10 @@
 import { IonGrid,IonRow,IonCol } from '@ionic/react'
-import React from 'react'
+import {useState,useEffect} from 'react'
 import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import ice from '../img/ice.png'
-import iceco from '../img/iceco.jpg'
-import fin from  '../img/fin.jpg'
+import axiosInstance from '../../axios'
 import Image from 'react-bootstrap/Image'
-import '../style.css'
+
+
 
 //Les pubs tape a l oeil de la page officielle
 
@@ -31,27 +29,41 @@ const responsive = {
   };
 
 function CarouselPub() {
-  const pic=[iceco,ice,fin]
+  const [pub,setpub]=useState([])
+  const [load,setload]=useState(false)
+
+  useEffect(()=>{
+    axiosInstance
+  .get('client/getpub')
+  .then(res=>{
+     setpub(res.data)
+     setload(true)
+     //console.log(res.data)
+  })
+ 
+ },[])
+  
     return (
-        <div>
-             <IonGrid> 
-             <IonRow>
-                 <IonCol size='12'>
-                 <Carousel
+        <div className='  divcarousel'>
+        {load?
+          <IonGrid> 
+           <IonRow>
+          <IonCol size='12'>
+          <Carousel
           responsive={responsive}
           containerClass="carousel-container" 
           infinite={true}
           autoPlay={true}
           autoPlaySpeed={5000}
           transitionDuration={500} >
-            {pic.map(p=>
-           <Image  src={p} alt=""  className='imgcarousel' key={p}/>
+            {pub.map(p=>
+           <Image  src={`http://127.0.0.1:8000${p.image}`} alt=""  key={p.id} className='imgcarousel'/>
             )}
-         
        </Carousel>
         </IonCol>
        </IonRow>
-         </IonGrid>   
+         </IonGrid>  
+         :null} 
         </div>
     )
 }
