@@ -1,7 +1,5 @@
 import { IonGrid,IonRow,IonCol } from '@ionic/react'
-import {useState,useEffect} from 'react'
 import Carousel from "react-multi-carousel";
-import axiosInstance from '../../axios'
 import Image from 'react-bootstrap/Image'
 
 
@@ -28,24 +26,11 @@ const responsive = {
     }
   };
 
-function CarouselPub() {
-  const [pub,setpub]=useState([])
-  const [load,setload]=useState(false)
-
-  useEffect(()=>{
-    axiosInstance
-  .get('client/getpub')
-  .then(res=>{
-     setpub(res.data)
-     setload(true)
-     //console.log(res.data)
-  })
- 
- },[])
+function CarouselPub({pub}) {
+  
   
     return (
         <div className='  divcarousel'>
-        {load?
           <IonGrid> 
            <IonRow>
           <IonCol size='12'>
@@ -66,7 +51,6 @@ function CarouselPub() {
         </IonCol>
        </IonRow>
          </IonGrid>  
-         :null} 
         </div>
     )
 }

@@ -17,7 +17,7 @@ function Recu() {
     useEffect(()=>{
       axiosInstance
       .post('client/messagespecifique/',{'id':id})
-      .then(res=>{
+      .then(res=>{ 
         //console.log(res.data)
         setrecu(res.data)
         setload(true) 

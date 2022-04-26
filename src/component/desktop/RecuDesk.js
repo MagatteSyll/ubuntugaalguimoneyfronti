@@ -36,7 +36,8 @@ function RecuDesk({recu}) {
                  <IonRow>
                      <IonCol size='5'>
                      <p>Date de la transaction</p>
-                     <h4>{new Date(recu.created).toLocaleDateString()}</h4>
+                     <h4>{new Date(recu.created).toLocaleDateString('en-GB',
+                     {hour: '2-digit', minute:'2-digit'})}</h4>
                      </IonCol>
                      <IonCol size='5' >
                      <p>Nature de la transaction </p>

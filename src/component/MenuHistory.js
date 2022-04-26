@@ -6,6 +6,15 @@ import Pagination from './Pagination'
 
 
 
+
+
+const searchnature=(message,nature)=>{
+   if(message.some(m=> m.nature_transaction ===nature)){
+    return true
+} else{
+    return false
+}
+  }
 function MenuHistory({messages}) {
   const [ghisto, setghisto] = useState(true)
   const  [seg, setseg] = useState('ghistory')
@@ -15,6 +24,8 @@ function MenuHistory({messages}) {
   const [retrait, setretrait] = useState(false)
   const [depot, setdepot] = useState(false)
   const [reception, setreception] = useState(false)
+
+  
   
 
 
@@ -122,10 +133,10 @@ function MenuHistory({messages}) {
         </IonSegment> 
         <div className='divhistory'>
         {ghisto?<HistoriqueGenerales messages={messages}/>:null}
-        {direct?<HistoryEnvoiDirectMobile messages={messages}/>:null}
-        {code?<HistoryCodeMobile messages={messages}/>:null}
-        {pay?<HistoryPayementMobile messages={messages}/>:null}
-        {retrait?<HistoryRetraitMobile messages={messages}/>:null}
+        {direct?<HistoryEnvoiDirectMobile messages={messages} />:null}
+        {code?<HistoryCodeMobile messages={messages} />:null}
+        {pay?<HistoryPayementMobile messages={messages} />:null}
+        {retrait?<HistoryRetraitMobile messages={messages} />:null}
         {depot?<HistoryDepotMobile messages={messages}/>:null}
         {reception?<HistoriqueReceptionMobile messages={messages}/>:null}
         </div>
@@ -149,7 +160,8 @@ function HistoriqueGenerales({messages}) {
                {currentPosts.map(m=>
            <IonItem key={m.id}>
            <Link to={`/recu/${m.id}/${m.nature_transaction}`} className='link'>
-            {m.message},{new Date(m.created).toLocaleDateString()}</Link>
+            {m.message},{new Date(m.created).toLocaleDateString('en-GB',
+                     {hour: '2-digit', minute:'2-digit'})}</Link>
             </IonItem>)}
          <Pagination
         postsPerPage={postsPerPage}
@@ -171,12 +183,15 @@ function  HistoriqueReceptionMobile({messages}) {
     return (
         <div>
            {messages.length>0?
+            <>
+           {searchnature(messages,"reception")?
             <div className='mt-3'>
                 {messages.map(m=>
               m.nature_transaction==="reception"?
             <IonItem key={m.id}>
            <Link to={`/recu/${m.id}/{m.nature_transaction}`} className='link'>
-           {m.message},{new Date(m.created).toLocaleDateString()} </Link> 
+           {m.message},{new Date(m.created).toLocaleDateString('en-GB',
+                     {hour: '2-digit', minute:'2-digit'})}</Link> 
              </IonItem>:null )}
             <Pagination
           postsPerPage={postsPerPage}
@@ -184,6 +199,7 @@ function  HistoriqueReceptionMobile({messages}) {
           paginate={paginate}
       />  
           </div>:<IonItem> <IonLabel>Aucun transfert reçu</IonLabel></IonItem>}
+    </>:<IonItem> <IonLabel>Aucune transaction</IonLabel></IonItem>}
         </div>
     )
 }
@@ -199,12 +215,15 @@ function  HistoryCodeMobile({messages}) {
     return (
         <div >
            {messages.length>0?
+            <>
+            {searchnature(messages,"envoi via code")?
             <div className='mt-3'>
                 {messages.map(m=>
               m.nature_transaction==="envoi via code"?
             <IonItem key={m.id}>
            <Link to={`/recu/${m.id}/{m.nature_transaction}`} className='link'> 
-           {m.message},{new Date(m.created).toLocaleDateString()}</Link>
+           {m.message},{new Date(m.created).toLocaleDateString('en-GB',
+                     {hour: '2-digit', minute:'2-digit'})}</Link>
              </IonItem>:null
           )}
             <Pagination
@@ -212,7 +231,8 @@ function  HistoryCodeMobile({messages}) {
         totalPosts={messages.length}
         paginate={paginate}
       />
-          </div>:<IonItem> <IonLabel>Aucun envoi via code effectué. </IonLabel></IonItem>}
+ </div>:<IonItem> <IonLabel> Oups vous n avez effectué aucun envoi via code . </IonLabel></IonItem>}
+ </>:<IonItem> <IonLabel> Oups vous n avez effectué aucune transaction . </IonLabel></IonItem>}
         </div>
     )
 }
@@ -227,13 +247,16 @@ function HistoryDepotMobile({messages}) {
    return ( 
        <div>
           {messages.length>0?
+            <>
+            {searchnature(messages,"depot")?
            <div className='mt-3'>
                {messages.map(m=>
             m.nature_transaction==="depot"?
            <IonItem key={m.id}>
           <IonItem className='centerbtn' >
           <Link to={`/recu/${m.id}/{m.nature_transaction}`} className='link'> 
-          {m.message},{new Date(m.created).toLocaleDateString()}</Link></IonItem>
+          {m.message},{new Date(m.created).toLocaleDateString('en-GB',
+                     {hour: '2-digit', minute:'2-digit'})}</Link></IonItem>
             </IonItem>:null)}
          <Pagination
         postsPerPage={postsPerPage}
@@ -241,7 +264,7 @@ function HistoryDepotMobile({messages}) {
         paginate={paginate}
       />
          </div>:<IonItem> <IonLabel>Oups vous n avez effectué aucun depot</IonLabel></IonItem>}
-       </div>
+      </>: <IonItem> <IonLabel>Oups vous n avez effectué aucune transaction</IonLabel></IonItem>}</div>
    )
        
 }
@@ -257,12 +280,15 @@ function HistoryEnvoiDirectMobile({messages}) {
     return (
         <div >
            {messages.length>0?
+            <>
+            {searchnature(messages,"envoi direct")?
             <div className='mt-3'>
                 {messages.map(m=>
             m.nature_transaction==="envoi direct"?
             <IonItem key={m.id}>
            <Link to={`/recu/${m.id}/${m.nature_transaction}`} className='link'>
-                 {m.message},{new Date(m.created).toLocaleDateString()}
+                 {m.message},{new Date(m.created).toLocaleDateString('en-GB',
+                     {hour: '2-digit', minute:'2-digit'})}
                  </Link>
              </IonItem>:null
           )}
@@ -272,6 +298,7 @@ function HistoryEnvoiDirectMobile({messages}) {
          paginate={paginate}
         />
           </div>:<IonItem><IonLabel>Oups vous n avez effectué aucun envoi direct</IonLabel></IonItem>}
+          </>:<IonItem><IonLabel>Oups vous n avez effectué aucune transaction</IonLabel></IonItem>}
           </div>
             
         
@@ -289,12 +316,15 @@ function HistoryEnvoiDirectMobile({messages}) {
         <div >
            <IonCard>
            {messages.length>0?
+            <>
+            {searchnature(messages,"payement")?
             <div className='mt-3'>
                 {messages.map(m=>
             m.nature_transaction==="payement"?
             <IonItem key={m.id}>
            <Link to={`/recu/${m.id}/${m.nature_transaction}`} className='link'>
-                {m.message},{new Date(m.created).toLocaleDateString()}
+                {m.message},{new Date(m.created).toLocaleDateString('en-GB',
+                     {hour: '2-digit', minute:'2-digit'})}
                 </Link>
              </IonItem>:null)}
             <Pagination
@@ -303,7 +333,9 @@ function HistoryEnvoiDirectMobile({messages}) {
          paginate={paginate}
         /> 
           </div>:<IonItem> <IonLabel>Oups vous n avez effectué aucun payement</IonLabel></IonItem>}
+          </>:<IonItem> <IonLabel>Oups vous n avez effectué aucune transaction</IonLabel></IonItem>}
          </IonCard>
+
         </div>
     )
 }
@@ -319,12 +351,15 @@ function  HistoryRetraitMobile({messages}) {
         <div >
            
             {messages.length>0?
+            <>
+            {searchnature(messages,"retrait")?
             <div className='mt-3'>
                 {messages.map(m=>
                   m.nature_transaction==="retrait"?
             <IonItem key={m.id}>
            <Link to={`/recu/${m.id}/${m.nature_transaction}`} className='link'> 
-            {m.message},{new Date(m.created).toLocaleDateString()}
+            {m.message},{new Date(m.created).toLocaleDateString('en-GB',
+                     {hour: '2-digit', minute:'2-digit'})}
             </Link>
              </IonItem>:null
           )}
@@ -334,7 +369,7 @@ function  HistoryRetraitMobile({messages}) {
          paginate={paginate}
         />
           </div>:<IonItem><IonLabel>Oups vous n avez effectué aucun retrait</IonLabel></IonItem>}
-  
+         </>:<IonItem><IonLabel>Oups vous n avez effectué aucune transaction</IonLabel></IonItem>}
         </div>
     )
 }

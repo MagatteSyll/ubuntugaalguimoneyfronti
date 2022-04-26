@@ -13,7 +13,8 @@ return(
   {message.map(m=>
    <IonCard>
    <IonItem  key={m.id} > <Link className='link' to={`/recu/${m.id}/${m.nature_transaction}`} >
-    {m.message},{new Date(m.created).toLocaleDateString()}</Link></IonItem></IonCard>
+    {m.message},{new Date(m.created).toLocaleDateString('en-GB',
+     {hour: '2-digit', minute:'2-digit'})}</Link></IonItem></IonCard>
    )}</div>
   <Link className='link m-4' to='/transaction' >
   Voir l historique  </Link>

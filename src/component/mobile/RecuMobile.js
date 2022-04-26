@@ -22,7 +22,8 @@ function RecuMobile({recu}) {
             </IonGrid>
             <div className='divrecumobile'>
                 <h6><b>Reçu de transaction GaalguiMoney</b></h6>
-                <p>Date de la transaction <b>{new Date(recu.created).toLocaleDateString()}</b></p>
+                <p>Date de la transaction <b>{new Date(recu.created).toLocaleDateString('en-GB',
+                     {hour: '2-digit', minute:'2-digit'})}</b></p>
                 <p>Nature de la transaction <b>{recu.nature_transaction}</b></p>
                {recu.code!=null? <p>Code de retrait:<b>{recu.code}</b></p>:null}
                <p>Montant de la transaction <b>{recu.montant} CFA </b></p>

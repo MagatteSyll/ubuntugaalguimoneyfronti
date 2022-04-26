@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const baseURL = 'https://gaalguimoneyback.herokuapp.com/api/';
-//const baseURL ='http://127.0.0.1:8000/api/'
+//const baseURL = 'https://gaalguimoneyback.herokuapp.com/api/';
+const baseURL ='http://127.0.0.1:8000/api/'
 
 const axiosInstance = axios.create({
 	baseURL: baseURL,
@@ -23,11 +23,9 @@ axiosInstance.interceptors.response.use(
 		const originalRequest = error.config;
 
 		if (typeof error.response === 'undefined') {
-			/*alert(
-				'A server/network error occurred. ' +
-					'Looks like CORS might be the problem. ' +
-					'Sorry about this - we will get it fixed shortly.'
-			);*/
+			alert(
+				'Erreur!'
+			);
 			return Promise.reject(error);
 		}
 
@@ -44,45 +42,14 @@ axiosInstance.interceptors.response.use(
 			error.response.status === 401 &&
 			error.response.statusText === 'Unauthorized'
 		) {
-			const refreshToken = localStorage.getItem('__jvmdf__');
-
-			if (refreshToken) {
-				const tokenParts = JSON.parse(atob(refreshToken.split('.')[1]));
-
-				// exp date in token is expressed in seconds, while now() returns milliseconds:
-				const now = Math.ceil(Date.now() / 1000);
-				//console.log(tokenParts.exp);
-
-				if (tokenParts.exp > now) {
-					return axiosInstance
-						.post('client/token/refresh/', { refresh: refreshToken })
-						.then((response) => {
-							localStorage.setItem('__jmdf__', response.data.access);
-							localStorage.setItem('__jvmdf__', response.data.refresh);
-
-							axiosInstance.defaults.headers['Authorization'] =
-								'JWT ' + response.data.access;
-							originalRequest.headers['Authorization'] =
-								'JWT ' + response.data.access;
-
-							return axiosInstance(originalRequest);
-						})
-						.catch((err) => {
-							console.log(err);
-						});
-				} else {
-					//console.log('Refresh token is expired', tokenParts.exp, now);
-					window.location.href = '/connexion/';
-				}
-			} else {
-				//console.log('Refresh token not available.');
-				window.location.href = '/connexion/';
-			}
+			
+	  	   localStorage.removeItem('__jdkm__');
+           localStorage.removeItem('__jvqm__');
+          window.location.href = '/connexion/';
+          window.location.reload()
+			} 
 		}
 
-		// specific error handling done elsewhere
-		return Promise.reject(error);
-	}
-);
+	);
 
 export default axiosInstance;

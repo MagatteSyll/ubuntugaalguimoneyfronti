@@ -4,10 +4,11 @@ import CarouselPub from './CarouselPub';
 //page accueil  officielle 
 
 
-function HomeOfficiel() {
+function HomeOfficiel({pub}) {
+
     return (
         <div> 
-        <CarouselPub/>
+        <CarouselPub pub={pub}/>
          <Nouveautes/> 
         </div>
     )
